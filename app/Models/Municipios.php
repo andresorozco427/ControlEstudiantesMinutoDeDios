@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Municipios extends Model
 {
     public $table = 'tbl_municipios';
-    protected $fillable = ['municipio', 'estado', 'departamento_id'];
-    public $timestamps = false;
+    protected $fillable = ['id','municipio', 'estado', 'departamento_id'];
+    public $timestamps = false; 
 }
