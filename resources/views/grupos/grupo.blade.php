@@ -17,8 +17,8 @@
                     <tr>
                         <td class="col1">{{$Indice+1}}</td>
                         <td>{{$value->nombre}}</td>
-                        <td>{{ date('d/m/Y', strtotime($value->fecha_inicio))}}</td>
-                        <td>{{ date('d/m/Y', strtotime($value->fecha_fin))}}</td>
+                        <td>{{date('d/m/Y', strtotime($value->fecha_inicio))}}</td>
+                        <td>{{date('d/m/Y', strtotime($value->fecha_fin))}}</td>
                         <td>{{$value->descripcion}}</td>
                     </tr>
                     @endforeach
