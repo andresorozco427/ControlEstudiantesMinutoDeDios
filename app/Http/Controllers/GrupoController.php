@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Grupo;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class GrupoController extends Controller
 {
@@ -37,7 +39,19 @@ class GrupoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|unique:tbl_grupo',
+            'fecha_inicio' => 'date_format:Y-m-d'
+        ]);
+
+        $grupo = new Grupo();
+        $grupo->nombre=$request->nombre;
+        $grupo->fecha_inicio=$request->fechaInicio;
+        $grupo->fecha_fin=$request->fechaFin;
+        $grupo->descripcion=$request->descripcion;
+        $grupo->save();
+
+        return redirect() -> back();
     }
 
     /**

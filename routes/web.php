@@ -16,3 +16,4 @@ Route::get("/", "DetalleEstudiantesLenguajesController@index");
 Route::get("/estudiante/lenguajes", "DetalleEstudiantesLenguajesController@index");
 
 Route::get("/grupos", "GrupoController@index");
+Route::post("/crearGrupo", "GrupoController@store");
