@@ -14,10 +14,11 @@ class HistorialPersonasGruposController extends Controller
      */
     public function index()
     {
-        $historialGruposPersonas = HistorialEstudianteGrupo::select('tbl_grupo.*', 'tbl_persona.nombre as nombrePersona', 'tbl_persona.apellido', 'tbl_persona.profesion')
-                                    ->join("tbl_grupo", "tbl_historial_estudiantes_grupos.id_grupo","=","tbl_grupo.id")
-                                    ->join("tbl_persona", "tbl_historial_estudiantes_grupos.id_persona","=","tbl_persona.identificacion")   
-                                    ->get();
+        $historialGruposPersonas = HistorialEstudianteGrupo::select('tbl_grupo.*', 'tbl_persona.nombre as 
+            nombrePersona', 'tbl_persona.apellido', 'tbl_persona.profesion')
+            ->join("tbl_grupo", "tbl_historial_estudiantes_grupos.id_grupo","=","tbl_grupo.id")
+            ->join("tbl_persona", "tbl_historial_estudiantes_grupos.id_persona","=","tbl_persona.identificacion")   
+            ->get();
         
         return view('grupos.historialPersonasGrupos', compact('historialGruposPersonas'));                              
     }
