@@ -14,7 +14,7 @@ class HistorialPersonasGruposController extends Controller
      */
     public function index()
     {
-        $historialGruposPersonas = HistorialEstudianteGrupo::select('tbl_grupo.*', 'tbl_persona.nombre as nombrePersona', 'tbl_persona.apellido', 'tbl_persona.profesion')
+        $historialGruposPersonas = HistorialEstudianteGrupo::select('tbl_grupo.*','tbl_persona.identificacion', 'tbl_persona.nombre as nombrePersona', 'tbl_persona.apellido', 'tbl_persona.profesion')
                                     ->join("tbl_grupo", "tbl_historial_estudiantes_grupos.id_grupo","=","tbl_grupo.id")
                                     ->join("tbl_persona", "tbl_historial_estudiantes_grupos.id_persona","=","tbl_persona.identificacion")   
                                     ->get();
@@ -49,9 +49,19 @@ class HistorialPersonasGruposController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $idGrupo = $request->idGrupo;
+        $identificacionPersona = $request->identificacion;
+
+        $historialGruposPersonas = HistorialEstudianteGrupo::select('tbl_grupo.*','tbl_grupo.nombre as nombreGrupo','tbl_persona.*')
+        ->join("tbl_grupo", "tbl_historial_estudiantes_grupos.id_grupo","=","tbl_grupo.id")
+        ->join("tbl_persona", "tbl_historial_estudiantes_grupos.id_persona","=","tbl_persona.identificacion")   
+        ->where('tbl_historial_estudiantes_grupos.id_grupo', $idGrupo)
+        ->where('tbl_historial_estudiantes_grupos.id_persona', $identificacionPersona)
+        ->first();
+
+        return (response()->json($historialGruposPersonas));
     }
 
     /**
