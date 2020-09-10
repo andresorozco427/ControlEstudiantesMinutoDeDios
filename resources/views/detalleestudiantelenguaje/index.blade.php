@@ -3,23 +3,20 @@
 @section("contenido")
 <div class="row">
     <div class="col">
-        <h3 class="text-center">Estudiantes</h1>
+        <h3 class="text-center">Crear Estudiantes</h1>
     </div>
 </div>
 <form action="#" method="post">
     @csrf
     <div class="row">
         <div class="col-12">
+            <br />
             <div class="card">
                 <div class="card-head">
+                    <br />
                     <h4 class="text-center">Info Estudiante</h4>
                 </div>
                 <div class="row card-body">
-
-                    <div class="form-group col-4">
-                        <label for="">Identificación</label>
-                        <input id="identificacion" type="text" class="form-control" name="identificacion">
-                    </div>
 
                     <div class="form-group col-4">
                         <label for="">Tipo de Identificación</label>
@@ -30,6 +27,12 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="form-group col-4">
+                        <label for="">Identificación</label>
+                        <input id="identificacion" type="text" class="form-control" name="identificacion">
+                    </div>
+
 
                     <div class="form-group col-4">
                         <label for="">Nombre</label>
@@ -108,7 +111,7 @@
 
                     <div class="form-group col-4">
                         <label for="">Lenguaje</label>
-                        <select id="lenguaje_id" class="form-control" name="id">
+                        <select id="lenguaje_id" class="form-control" name="lenguaje_id">
                             <option value="">Seleccione</option>
                             @foreach($lenguaje as $value)
                             <option value="{{ $value->id }}">{{ $value->nombre }}</option>
@@ -126,8 +129,9 @@
         </div>
 
         <div class="col-12">
+            <br />
             <div class="card">
-                <table>
+                <table class="table">
                     <thead>
                         <th>Tipo</th>
                         <th>Identificación</th>
@@ -135,7 +139,7 @@
                         <th>Lenguaje</th>
                         <th>Opciones</th>
                     </thead>
-                    <tbody id="tblLenguales">
+                    <tbody id="tblLenguajes">
 
                     </tbody>
                 </table>
@@ -146,37 +150,35 @@
 @endsection
 
 @section("script")
+<script>
+    function agregar_estudiante() {
+        let lenguaje_id = $("#lenguaje_id option:selected").val();
+        let lenguaje_text = $("#lenguaje_id option:selected").text();
+        let tipo_identificacion = $("#id_tipo_identificacion option:selected").val();
+        let tipo_identificacion_text = $("#id_tipo_identificacion option:selected").text();
+        let identificacion = $("#identificacion").val();
+        let nombre = $("#nombre").val();
 
-    <script>
-        function agregar_estudiante(){
-            let lenguaje_id = $("#lenguaje_id option:selected").val();
-            let lenguaje_text = $("#lenguaje_id option:selected").text();
-            let tipo_identificacion = $("#id_tipo_identificacion option:selected").val();
-            let identificacion = $("#identificacion option:selected").val();
-            let nombre = $("#nombre option:selected").val();
-        }
-
-        if(nombre > 0 && identificacion > 0){
-
-            $("#tblLenguales").append(`
-                <tr>
-                    <td>${tipo_identificacion}</td>
+            $("#tblLenguajes").append(`
+                <tr id="tr-${identificacion}">
+                    <td>${tipo_identificacion_text}</td>
                     <td>${identificacion}</td>
                     <td>${nombre}</td>
                     <td>
-                        <input type="hidden" name="lenguaje_id[]" value="${lenguaje_id}"
+                        <input type="hidden" name="lenguaje_id[]" value="${lenguaje_id}" />
+                        <input type="hidden" name="tipo_identificacion[]" value="${tipo_identificacion}" />
                         ${lenguaje_text}
                     </td>
                     <td>
-                        <button class="btn btn-danger">X</button>
+                        <button type="button" class="btn btn-danger" onclick="eliminar_lenguaje(${identificacion})">X</button>
                     </td>
                 </tr>
             `);
+    }
 
-        }else{
-            alert("El campo nombre y identificación son obligatorios")
-        }
+    function eliminar_lenguaje(id){
+        $("#tr-"+id).remove;
+    }
 
-    </script>
-
+</script>
 @endsection
