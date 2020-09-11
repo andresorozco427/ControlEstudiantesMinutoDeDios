@@ -21,29 +21,102 @@
                 <td>{{$value->nombre}}</td>
                 <td>{{date('d/m/Y', strtotime($value->fecha_inicio))}}</td>
                 <td>{{date('d/m/Y', strtotime($value->fecha_fin))}}</td>
-                <td><a href="#" class="edit-modal btn btn-secondary btn-sm" onclick="verHistorial({{$value->id}},{{$value->identificacion}})" title="Edit implement" data-target='#edit-implemento' data-toggle='modal'>
-                        <i class="fa fa-edit iconColor"></i>
-                    </a></td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="verHistorial({{$value->id}}, {{$value->identificacion}})" data-toggle="modal" data-target="#verDetalleHistorialGrupos">Ver detalle</button>                    
+                </td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
 
-<!-- Form Show Categoria -->
-<div id="show" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+<div id="verDetalleHistorialGrupos" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header" style="background: #48DA7D">
-                <h4 class="modal-title">Ver detalle</h4>
+            <div class="modal-header">
+                <h4 class="modal-title">Información detalle estudiante y grupo</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
+                <h4><b>Información del estudiante</b></h4>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="Identificacion">Identificacion:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="Identificacion" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="Nombre">Nombre:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="Nombre" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="Correo">Correo:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="Correo" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="Edad">Edad:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="Edad" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="Profesion">Profesion:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="Profesion" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="Telefono">Telefono:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="Telefono" disabled>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h4><b>Información del curso</b></h4>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="NombreCurso">Nombre:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="NombreCurso" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="fecha_inicio">Fecha Inicio:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="fecha_inicio" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label class="control-label" for="fecha_fin">Fecha Fin:</label>
+                        <div class="input-group input-group-prepend">
+                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                            <input type="text" class="form-control" id="fecha_fin" disabled>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group col-12 col-md-12 col-lg-12 col-xl-12 col-sm-12">
-                    <label class="control-label" for="id">Category Name:</label>
+                    <label class="control-label" for="descripcion">Descripcion:</label>
                     <div class="input-group input-group-prepend">
                         <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
-                        <input type="text" class="form-control show_categoria" id="show_categoria" disabled>
+                        <textarea class="form-control" id="descripcion" aria-label="With textarea" cols="110" disabled></textarea>
                     </div>
                 </div>
             </div>
@@ -56,13 +129,11 @@
         </div>
     </div>
 </div>
-
 @endsection
 
-@section("footer_scripts")
+@section("script")
 <script>
     function verHistorial(id, identificacion) {
-        console.log(id, identificacion);
         $.ajax({
             url: "/historialGrupos/ver",
             type: "GET",
@@ -72,11 +143,30 @@
             },
             dataType: 'json',
             success: function(data) {
-               console.log(data);
+                $('#Identificacion').val(data["identificacion"]);
+                $('#Nombre').val(data["nombre"]);
+                $('#Correo').val(data["correo"]);
+                $('#Edad').val(data["edad"]);
+                $('#Profesion').val(data["profesion"]);
+                $('#Telefono').val(data["telefono"]);
+                $('#NombreCurso').val(data["nombreGrupo"]);
+                formatearEinsertarCampoFecha(data["fecha_inicio"], "fecha_inicio")
+                formatearEinsertarCampoFecha(data["fecha_fin"], "fecha_fin")
+                $('#descripcion').val(data["descripcion"]);
             }
 
         });
 
     }
+
+    function formatearEinsertarCampoFecha(fecha, idCampo) {
+        var fechaFormateadaEnBarras = new Date(fecha.split("/").reverse().join("-"));
+        var dia = fechaFormateadaEnBarras.getDate() + 1;
+        var mes = fechaFormateadaEnBarras.getMonth() + 1;
+        var año = fechaFormateadaEnBarras.getFullYear();
+        var NuevaFecha = dia + "/" + mes + "/" + año;
+
+        $("#" + idCampo).val(NuevaFecha);
+    } 
 </script>
 @endsection

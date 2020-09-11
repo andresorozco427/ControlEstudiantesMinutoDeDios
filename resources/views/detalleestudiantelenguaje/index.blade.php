@@ -15,13 +15,12 @@
                     <h4 class="text-center">Info Estudiante</h4>
                 </div>
                 <div class="row card-body">
-
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Identificación</label>
                         <input id="identificacion" type="text" class="form-control" name="identificacion">
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Tipo de Identificación</label>
                         <select id="id_tipo_identificacion" class="form-control" name="id_tipo_identificacion">
                             <option value="">Seleccione</option>
@@ -31,17 +30,18 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Nombre</label>
                         <input id="nombre" type="text" class="form-control" name="nombre">
                     </div>
-
-                    <div class="form-group col-4">
+                </div>
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Apellido</label>
                         <input type="text" class="form-control" name="apellido">
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Género</label>
                         <select class="form-control" name="id_sexo">
                             <option value="">Seleccione</option>
@@ -50,28 +50,29 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Dirección</label>
                         <input type="text" class="form-control" name="direccion">
                     </div>
-
-                    <div class="form-group col-4">
+                </div>
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Teléfono</label>
                         <input type="text" class="form-control" name="telefono">
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Correo</label>
                         <input type="text" class="form-control" name="correo">
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Profesión</label>
                         <input type="text" class="form-control" name="profesion">
                     </div>
-
-                    <div class="form-group col-4">
+                </div>
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Departamento</label>
                         <select class="form-control" name="id_departamento">
                             <option value="">Seleccione</option>
@@ -81,7 +82,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Municipio</label>
                         <select class="form-control" name="id_municipio">
                             <option value="">Seleccione</option>
@@ -91,7 +92,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Tipo de Persona</label>
                         <select class="form-control" name="id_tipo_de_persona">
                             <option value="">Seleccione</option>
@@ -100,13 +101,14 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="form-group col-4">
+                </div>
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-6 col-lg-6 col-xl-6 col-sm-12">
                         <label for="">Edad</label>
                         <input type="text" class="form-control" name="edad">
                     </div>
 
-                    <div class="form-group col-4">
+                    <div class="form-group col-12 col-md-6 col-lg-6 col-xl-6 col-sm-12">
                         <label for="">Lenguaje</label>
                         <select id="lenguaje_id" class="form-control" name="id">
                             <option value="">Seleccione</option>
@@ -115,6 +117,7 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
 
                     <div class="col-12">
                         <button onclick="agregar_estudiante()" type="button"
