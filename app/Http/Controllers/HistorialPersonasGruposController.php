@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\HistorialEstudianteGrupo;
+use Illuminate\Support\Facades\DB;
 
 class HistorialPersonasGruposController extends Controller
 {
@@ -93,8 +94,16 @@ class HistorialPersonasGruposController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $idGrupo = $request->idGrupo;
+        $idPersona = $request->idPersona;
+
+        DB::table('tbl_historial_estudiantes_grupos')->where('id_persona', '=', $idPersona)
+        ->where('id_grupo','=', $idGrupo)->delete();
+
+        return (response()->json([
+            'confirmacion' => 'El usuario ha sido eliminado satisfactoriamente!'
+         ]));
     }
 }

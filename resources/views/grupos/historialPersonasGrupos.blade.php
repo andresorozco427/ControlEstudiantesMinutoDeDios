@@ -22,7 +22,8 @@
                 <td>{{date('d/m/Y', strtotime($value->fecha_inicio))}}</td>
                 <td>{{date('d/m/Y', strtotime($value->fecha_fin))}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="verHistorial({{$value->id}}, {{$value->identificacion}})" data-toggle="modal" data-target="#verDetalleHistorialGrupos">Ver detalle</button>                    
+                    <button type="button" class="btn btn-primary" onclick="verHistorial({{$value->id}}, {{$value->identificacion}})" data-toggle="modal" data-target="#verDetalleHistorialGrupos">Ver detalle</button>
+                    <button type="button" class="btn btn-danger" onclick="eliminarPersonaDeGrupo({{$value->id}}, {{$value->identificacion}})">Eliminar</button>
                 </td>
             </tr>
             @endforeach
@@ -167,6 +168,39 @@
         var NuevaFecha = dia + "/" + mes + "/" + año;
 
         $("#" + idCampo).val(NuevaFecha);
-    } 
+    }
+
+    function eliminarPersonaDeGrupo(idGrupo, idPersona) {
+        swal({
+                title: "Estas seguro?",
+                text: "Deseas eliminar la persona del respectivo grupo!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/historialGrupos/eliminarPersonaGrupo",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            'idGrupo': idGrupo,
+                            'idPersona': idPersona
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            swal("El usuario ha sido eliminado satisfactoriamente!", {
+                                icon: "success",
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    });
+                }
+            });
+    }
 </script>
 @endsection
