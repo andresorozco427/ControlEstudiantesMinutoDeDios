@@ -22,7 +22,7 @@
                         <td>{{date('d/m/Y', strtotime($value->fecha_fin))}}</td>
                         <td>{{$value->descripcion}}</td>
                         <td>   
-                        <button type="button" class="btn btn-primary" onclick="editar({{$value->id}})" data-toggle="modal" data-target="#exampleModal">Editar</button>                        
+                        <button type="button" class="btn btn-primary" onclick="editar({{$value->id}})" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil" aria-hidden="true"></i></button>                        
                           
                         </td>
                     </tr>                    
@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Editar</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                     </form>       
                                 </div>
                                 </div>
