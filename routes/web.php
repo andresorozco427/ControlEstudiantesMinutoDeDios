@@ -17,5 +17,6 @@ Route::get("/estudiante/lenguajes", "DetalleEstudiantesLenguajesController@index
 
 Route::get("/grupos", "GrupoController@index");
 Route::post("/crearGrupo", "GrupoController@store");
-
+Route::get('/grupos/ver','GrupoController@edit'); 
+Route::post('grupos', 'GrupoController@update');
 Route::get("/historialGrupos", "HistorialPersonasGruposController@index");
