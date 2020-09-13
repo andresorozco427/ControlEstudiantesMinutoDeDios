@@ -60,9 +60,12 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(request $request)
     {
         //
+        $id = $request ->id;
+        $grupos = grupo::find($id);
+        return (response()->json($grupos));
     }
 
     /**
@@ -71,9 +74,15 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+               
+      // $grupos = grupo::findOrfail($id);
+
+      $idGrupo = $request->id;
+     $consultaGrupo = grupo::findOrFail($idGrupo);
+     return (response()->json($consultaGrupo));
+      // return view('grupos.edit', compact('grupos'));
     }
 
     /**
@@ -83,9 +92,19 @@ class GrupoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        $grupo = Grupo::findOrFail($request->id_upd);    
+        $grupo->nombre = $request->nombre_upd;
+        $grupo->fecha_inicio = $request->fecha_inicio_upd;
+        $grupo->fecha_fin = $request->fecha_fin_upd;
+        $grupo->descripcion = $request->descripcion_upd; 
+    
+        $grupo->save();
+        
+        return redirect('grupos');  
+    
     }
 
     /**

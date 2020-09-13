@@ -1,10 +1,11 @@
 @extends("app")
 
 @section("contenido")
-<div class="form-group col-12 col-md-8 col-lg-8 col-xl-8 col-sm-12">
+<div class="container-fluid">
     <table class="table">
         <thead class="thead-dark">
             <th width="15px">#</th>
+            <th>Identificación</th>
             <th>Nombre Persona</th>
             <th>Profesión</th>
             <th>Nombre Grupo</th>
@@ -16,14 +17,15 @@
             @foreach ($historialGruposPersonas as $Indice => $value)
             <tr>
                 <td class="col1">{{$Indice+1}}</td>
+                <td>{{$value->identificacion}}</td>
                 <td>{{$value->nombrePersona}} {{$value->apellido}}</td>
                 <td>{{$value->profesion}}</td>
                 <td>{{$value->nombre}}</td>
                 <td>{{date('d/m/Y', strtotime($value->fecha_inicio))}}</td>
                 <td>{{date('d/m/Y', strtotime($value->fecha_fin))}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="verHistorial({{$value->id}}, {{$value->identificacion}})" data-toggle="modal" data-target="#verDetalleHistorialGrupos">Ver detalle</button>
-                    <button type="button" class="btn btn-danger" onclick="eliminarPersonaDeGrupo({{$value->id}}, {{$value->identificacion}})">Eliminar</button>
+                    <button type="button" class="btn btn-primary" onclick="verHistorial({{$value->id}}, {{$value->identificacion}})" data-toggle="modal" data-target="#verDetalleHistorialGrupos"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-danger" onclick="eliminarPersonaDeGrupo({{$value->id}}, {{$value->identificacion}})"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                 </td>
             </tr>
             @endforeach
