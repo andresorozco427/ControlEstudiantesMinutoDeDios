@@ -56,13 +56,16 @@
         }
     }
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" /> 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"/>
 @endsection
 
 @section('contenido')
-<div class="container-fluid">
+<div class="container-fluid" style="width:100%;height:120%;">
     <div class="row">
         <div class="form-group col-12 col-md-8 col-lg-8 col-xl-8 col-sm-12">
-            <table class="table">
+            <table class="table" id="gruposDTB">
                 <thead class="thead-dark">
                     <th width="15px">#</th>
                     <th>Nombre</th>
@@ -196,5 +199,16 @@
             }
         });
     }
+</script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#gruposDTB').DataTable();
+        responsive : true;
+        autowitdh: false;
+    } );
 </script>
 @endsection
