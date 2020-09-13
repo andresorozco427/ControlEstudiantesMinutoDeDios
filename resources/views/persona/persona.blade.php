@@ -1,4 +1,8 @@
 @extends("app")
+@section("header_styles"");
+
+
+@endsection
 
 @section("contenido")
 <div class="row">

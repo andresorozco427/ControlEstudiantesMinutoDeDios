@@ -1,6 +1,65 @@
 @extends("app")
 
 @section("contenido")
+@section("header_styles");
+<script>
+function validar(){
+let nombre_ =$('#nombre').val();
+let fecha_inicio_ =$('#fechaInicio').val();
+let fecha_fin_ =$('#fechaFin').val();
+let descripcion_ =$('#descripcion').val();
+
+if (nombre_.length == 0 || /^\s+$/.test(nombre_) ) {
+      swal("Error", "El campo Nombre no puede ir vacío", "error");
+      return false;
+    }
+    if (fecha_inicio_ === "") {
+        swal({
+              title: "El campo fecha no puede ir vacío",
+              text: "Por favor ingresar fecha ",
+              icon: "error"
+            });
+            return false;
+    }
+    if (fecha_fin === "") {
+        swal({
+              title: "El campo fecha no puede ir vacío",
+              text: "Por favor ingresar fecha ",
+              icon: "error"
+            });
+            return false;
+    }
+  }  
+</script>
+<script>
+function validar_editar(){
+let nombre_ =$('#nombre_upd').val();
+let fecha_inicio_ =$('#fecha_inicio_upd').val();
+let fecha_fin_ =$('#fecha_fin_upd').val();
+
+if (nombre_.length == 0 || /^\s+$/.test(nombre_) ) {
+      swal("Error", "El campo Nombre no puede ir vacío", "error");
+      return false;
+    }
+    if (fecha_inicio_ === "") {
+        swal({
+              title: "Fecha Inicio es obligatoria!",
+              text: "Por favor ingresar fecha ",
+              icon: "error"
+            });
+            return false;
+    }
+    if (fecha_fin === "") {
+        swal({
+              title: "Fecha Inicio es obligatoria!",
+              text: "Por favor ingresar fecha ",
+              icon: "error"
+            });
+            return false;
+    }
+  }  
+</script>
+@endsection
 <div class="container-fluid">
     <div class="row">
         <div class="form-group col-12 col-md-8 col-lg-8 col-xl-8 col-sm-12">
@@ -31,7 +90,7 @@
             </table>
         </div>
         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
-            <form action="{{url('/crearGrupo')}}" method="POST">
+            <form action="{{url('/crearGrupo')}}" onsubmit='return validar()' method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
@@ -75,7 +134,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container-fluid">
-                                            <form action="{{url('/grupos')}}" method="POST">
+                                            <form action="{{url('/grupos')}}" onsubmit='return validar_editar()' method="POST">
                                                 {{ csrf_field() }}
                                                 <div class="col-md-12">
                                                     <label hidden>Id</label>
