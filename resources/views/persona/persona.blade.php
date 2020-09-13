@@ -9,10 +9,10 @@
         var telefono = document.getElementById("telefono").value;
         var edad = document.getElementById("edad").value;
 
-        if (identificacion.length == 0 ) {
+        if (identificacion.length == 0) {
             swal("Atención", "El campo identificacion es obligatorio", "error");
             return false;
-        } else if (nombre.length == 0 ) {
+        } else if (nombre.length == 0) {
             swal("Atención", "El campo nombre es obligatorio", "error");
             return false;
         } else if (apellido.length == 0) {
@@ -26,8 +26,8 @@
             return false;
         } else {
             setTimeout(function() {
-                swal("Exito", "Se ha registrado el estudiante " + nombre + " " + apellido
-                + "satisfactoriamente", "success");
+                swal("Exito", "Se ha registrado el estudiante " + nombre + " " + apellido +
+                    "satisfactoriamente", "success");
             }, 500);
         }
     }
@@ -35,14 +35,6 @@
 @endsection
 
 @section("contenido")
-<div class="row">
-    <div class="col">
-        <h3 class="text-center">Crear Estudiantes</h1>
-    </div>
-</div>
-<div class="container-fluid">
-
-</div>
 <form action="{{url('/crearPersona')}}" method="post" onsubmit="return validarFormularioPersona()">
     {{ csrf_field() }}
     <div class="row">

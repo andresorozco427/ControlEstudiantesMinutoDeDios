@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get("/", "PersonaController@index");
+Route::get("/estudiantes", "PersonaController@index");
 Route::post("/crearPersona", "PersonaController@store");
 
 Route::get("/grupos", "GrupoController@index");
