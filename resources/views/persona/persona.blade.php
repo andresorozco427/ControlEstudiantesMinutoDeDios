@@ -1,8 +1,4 @@
 @extends("app")
-@section("header_styles"");
-
-
-@endsection
 
 @section("header_styles")
 <script type="text/javascript">
