@@ -74,7 +74,7 @@
                 <tbody>
                     @foreach ($grupos as $Indice => $value)
                     <tr>
-                        <td class="col1">{{$Indice+1}}</td>
+                        <td class="col1"><b>{{$Indice+1}}</b></td>
                         <td>{{$value->nombre}}</td>
                         <td>{{date('d/m/Y', strtotime($value->fecha_inicio))}}</td>
                         <td>{{date('d/m/Y', strtotime($value->fecha_fin))}}</td>
@@ -91,7 +91,7 @@
         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
             <form action="{{url('/crearGrupo')}}" onsubmit='return validar()' method="POST">
                 {{ csrf_field() }}
-                <div class="form-group">
+                <div class="form-group col-12 col-md-12 col-lg-12 col-xl-12 col-sm-12">
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
                     @error('nombre')
@@ -99,23 +99,29 @@
                     @enderror
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-12 col-md-6 col-lg-6 col-xl-6 col-sm-12">
                         <label for="fechaInicio">Fecha Inicio</label>
                         <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
                         @error('fecha_inicio')
                         <p style="color: red;">{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-12 col-md-6 col-lg-6 col-xl-6 col-sm-12">
                         <label for="fechaFin">Fecha Fin</label>
                         <input type="date" class="form-control" id="fechaFin" name="fechaFin" placeholder="Fecha Fin">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-12 col-md-12 col-lg-12 col-xl-12 col-sm-12">
                     <label for="descripcion">Descripcion</label>
                     <textarea class="form-control" name="descripcion" id="descripcion" rows="10" placeholder="Descripcion"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <div class="form-group">
+                    <div class="form-group col-12 col-md-6 col-lg-6 col-xl-6 col-sm-12"></div>
+                    <div class="form-group col-12 col-md-5 col-lg-5 col-xl-5 col-sm-12"></div>
+                    <div class="form-group col-12 col-md-1 col-lg-1 col-xl-1 col-sm-12">
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
