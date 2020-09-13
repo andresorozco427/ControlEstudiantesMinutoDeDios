@@ -10,20 +10,12 @@ use App\Models\Sexo;
 use App\Models\Departamentos;
 use App\Models\Municipios;
 use App\Models\TipoPersona;
+use App\Models\Grupo;
 use App\Models\DetalleEstudiantesLenguajes;
 
 class DetalleEstudiantesLenguajesController extends Controller
 {
     public function index(){
-
-        $lenguaje = Lenguajes::all();
-        $tipodocumento = TipoDocumento::all();
-        $sexo = Sexo::all();
-        $departamento = Departamentos::all();
-        $municipio = Municipios::all();
-        $tipopersona = TipoPersona::all();
-
-        return view("detalleestudiantelenguaje.index", compact("lenguaje", "tipodocumento", "sexo", 
-        "departamento", "municipio", "tipopersona"));
+      
     }
 }

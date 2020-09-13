@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Models\Persona;
-use Models\Departamentos;
-use Models\Municipios;
-use Models\Sexo;
-use Models\TipoDocumento;
-use Models\TipoPersona;
+use App\Models\Persona;
+use App\Models\Departamentos;
+use App\Models\Municipios;
+use App\Models\Sexo;
+use App\Models\TipoPersona;
+use App\Models\Lenguajes;
+use App\Models\TipoDocumento;
+use App\Models\Grupo;
+use App\Models\DetalleEstudiantesLenguajes;
+use App\Models\HistorialEstudianteGrupo;
 use Validator;
 
 class PersonaController extends Controller
@@ -22,17 +26,23 @@ class PersonaController extends Controller
     {
         $personas = Persona::select("tbl_persona.*", "tbl_departamentos.departamento", "tbl_municipios.municipio", 
         "tbl_tipo_de_persona.nombre", "tbl_sexo.nombre", "tbl_tipos_de_documento.nombre")
-        ->join("tbl_departamentos", "tbl_persona.id_departamento", "=", "id")
-        ->join("tbl_municipios", "tbl_persona.id_municipio", "=", "id")
-        ->join("tbl_tipo_de_persona", "tbl_persona.id_tipo_de_persona", "=", "id")
-        ->join("tbl_sexo", "tbl_persona.id_sexo", "=", "id")
-        ->join("tbl_tipos_de_documento", "tbl_persona.id_tipo_identificacion", "=", "id")
+        ->join("tbl_departamentos", "tbl_persona.id_departamento", "=", "tbl_departamentos.id")
+        ->join("tbl_municipios", "tbl_persona.id_municipio", "=", "tbl_municipios.id")
+        ->join("tbl_tipo_de_persona", "tbl_persona.id_tipo_de_persona", "=", "tbl_tipo_de_persona.id")
+        ->join("tbl_sexo", "tbl_persona.id_sexo", "=", "tbl_sexo.id")
+        ->join("tbl_tipos_de_documento", "tbl_persona.id_tipo_identificacion", "=", "tbl_tipos_de_documento.id")
         ->get();
 
-        return response()->json([
-            "ok"=> true,
-            "data"=> $personas
-        ]);
+        $lenguaje = Lenguajes::all();
+        $tipodocumento = TipoDocumento::all();
+        $sexo = Sexo::all();
+        $departamento = Departamentos::all();
+        $municipio = Municipios::all();
+        $tipopersona = TipoPersona::all();
+        $grupos = Grupo::all();
+
+        return view("persona.persona", compact("personas","lenguaje", "tipodocumento", "sexo", 
+        "departamento", "municipio", "tipopersona", "grupos"));
     }
 
     public function detalle()
@@ -47,44 +57,69 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $respuesta)
+    public function store(Request $request)
     {
-        $datos = $respuesta->all();
+        $persona = new Persona();
 
-        $validador = Validator::make($respuesta->all(), [
-            'id_tipo_identificacion' => 'required|numeric|max:11',
-            'nombre' => 'required|max:50',
-            'apellido' => 'required|max:50',
-            'id_sexo' => 'required|numeric|max:11',
-            'direccion' => 'required|max:50',
-            'telefono' => 'required|max:20',
-            'correo' => 'required|max:50',
-            'profesion' => 'required|max:50',
-            'id_departamento' => 'required|numeric|max:11',
-            'id_municipio' => 'required|numeric|max:11',
-            'id_tipo_de_persona' => 'required|numeric|max:11',
-            'edad' => 'required|numeric|max:3',
+        $request->validate([
+            'identificacion' => 'required|unique:tbl_persona',
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'telefono' => 'required|unique:tbl_persona',
+            'edad' => 'required'
         ]);
 
-        if ($validador->fails()){
-            return response()->json([
-              'ok'=> false,
-              'error'=> $validador
-              ]);
+        $persona->identificacion = $request->identificacion;
+        $persona->id_tipo_identificacion = $request->id_tipo_identificacion;
+        $persona->nombre = $request->nombre;
+        $persona->apellido = $request->apellido;
+        $persona->id_sexo = $request->id_sexo;
+        $persona->direccion = $request->direccion;
+        $persona->telefono = $request->telefono;
+        $persona->correo = $request->correo;
+        $persona->profesion = $request->profesion;
+        $persona->id_departamento = $request->id_departamento;
+        $persona->id_municipio = $request->id_municipio;
+        $persona->id_tipo_de_persona = $request->id_tipo_de_persona;
+        $persona->edad = $request->edad;
+        $persona->save();
+
+        $this->guardarTablaDeDetalleLenguajesProgramacion($request);
+        $this->guardarTablaDetalleHistorialGrupos($request);
+
+        return redirect() -> back();
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function guardarTablaDeDetalleLenguajesProgramacion(Request $request){
+        $identificacionEstudiante = $request->identificacion;
+        $numeroDeLenguajes = count($request->lenguaje_id);
+        $lenguajes = $request->lenguaje_id;
+        for ($i = 0; $i < $numeroDeLenguajes; $i++) {
+            DetalleEstudiantesLenguajes::create([
+                'id_estudiante' => $identificacionEstudiante,
+                'id_lenguaje' => $lenguajes[$i]
+            ]);
         }
+    }
 
-        try{
-            Persona::create($datos);
-
-        return response()->json([
-            "ok"=> true,
-            "mensaje" => "Registro exitoso" 
-        ]);
-
-        }catch(\Exception $ex){
-            return response()->json([
-                "ok" => false,
-                "error" => $ex-> getMessage()
+     /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function guardarTablaDetalleHistorialGrupos(Request $request){
+        $identificacionEstudiante = $request->identificacion;
+        $numeroDeCursos = count($request->grupo_id);
+        $grupo = $request->grupo_id;
+        for ($i = 0; $i < $numeroDeCursos; $i++) {
+            HistorialEstudianteGrupo::create([
+                'id_persona' => $identificacionEstudiante,
+                'id_grupo' => $grupo[$i]
             ]);
         }
     }

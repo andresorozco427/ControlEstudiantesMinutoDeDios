@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get("/", "DetalleEstudiantesLenguajesController@index");
-Route::get("/estudiante/lenguajes", "DetalleEstudiantesLenguajesController@index");
+Route::get("/", "PersonaController@index");
+Route::post("/crearPersona", "PersonaController@store");
 
 Route::get("/grupos", "GrupoController@index");
 Route::post("/crearGrupo", "GrupoController@store");
