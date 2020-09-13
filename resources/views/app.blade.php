@@ -20,7 +20,6 @@
         }
     </style>
     <title>Estudiantes</title>
-
     @yield('header_styles')
 </head>
 
