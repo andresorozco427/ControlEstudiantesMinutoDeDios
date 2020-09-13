@@ -1,13 +1,50 @@
 @extends("app")
 
+@section("header_styles")
+<script type="text/javascript">
+    function validarFormularioPersona() {
+        var identificacion = document.getElementById("identificacion").value;
+        var nombre = document.getElementById("nombre").value;
+        var apellido = document.getElementById("apellido").value;
+        var telefono = document.getElementById("telefono").value;
+        var edad = document.getElementById("edad").value;
+
+        if (identificacion.length == 0 ) {
+            swal("Atención", "El campo identificacion es obligatorio", "error");
+            return false;
+        } else if (nombre.length == 0 ) {
+            swal("Atención", "El campo nombre es obligatorio", "error");
+            return false;
+        } else if (apellido.length == 0) {
+            swal("Atención", "El campo apellido es obligatorio", "error");
+            return false;
+        } else if (telefono.length == 0) {
+            swal("Atención", "El campo telefono es obligatorio", "error");
+            return false;
+        } else if (edad.length == 0) {
+            swal("Atención", "El campo edad es obligatorio", "error");
+            return false;
+        } else {
+            setTimeout(function() {
+                swal("Exito", "Se ha registrado el estudiante " + nombre + " " + apellido
+                + "satisfactoriamente", "success");
+            }, 500);
+        }
+    }
+</script>
+@endsection
+
 @section("contenido")
 <div class="row">
     <div class="col">
         <h3 class="text-center">Crear Estudiantes</h1>
     </div>
 </div>
-<form action="{{url('/crearPersona')}}" method="post">
-{{ csrf_field() }}
+<div class="container-fluid">
+
+</div>
+<form action="{{url('/crearPersona')}}" method="post" onsubmit="return validarFormularioPersona()">
+    {{ csrf_field() }}
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -39,7 +76,7 @@
                 <div class="row card-body">
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Apellido</label>
-                        <input type="text" class="form-control" name="apellido">
+                        <input id="apellido" type="text" class="form-control" name="apellido">
                     </div>
 
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
@@ -59,7 +96,7 @@
                 <div class="row card-body">
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Teléfono</label>
-                        <input type="text" class="form-control" name="telefono">
+                        <input id="telefono" type="text" class="form-control" name="telefono">
                     </div>
 
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
@@ -106,7 +143,7 @@
                 <div class="row card-body">
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label for="">Edad</label>
-                        <input type="text" class="form-control" name="edad">
+                        <input id="edad" type="text" class="form-control" name="edad">
                     </div>
 
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
@@ -137,7 +174,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </form>
 @endsection
