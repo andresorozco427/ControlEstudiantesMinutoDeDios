@@ -32,6 +32,8 @@
         }
     }
 </script>
+<script src="https://kit.fontawesome.com/028284e1f8.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/input.css')}}" />
 @endsection
 
 @section("contenido")
@@ -49,7 +51,8 @@
                     <div class="row card-body">
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                             <label for="">Identificación</label>
-                            <input id="identificacion" type="text" class="form-control" name="identificacion">
+                            <input id="identificacion" type="text" class="form-control" name="identificacion" placeholder="Identificación">
+                            <i class="fas fa-address-card"></i>
                         </div>
 
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
@@ -64,13 +67,15 @@
 
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                             <label for="">Nombre</label>
-                            <input id="nombre" type="text" class="form-control" name="nombre">
+                            <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre">
+                            <i class="fas fa-user"></i>
                         </div>
                     </div>
                     <div class="row card-body">
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                             <label for="">Apellido</label>
-                            <input id="apellido" type="text" class="form-control" name="apellido">
+                            <input id="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido">
+                            <i class="fas fa-user"></i>
                         </div>
 
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
@@ -84,23 +89,27 @@
                         </div>
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                             <label for="">Dirección</label>
-                            <input type="text" class="form-control" name="direccion">
+                            <input type="text" class="form-control" name="direccion" placeholder="Dirección">
+                            <i class="fas fa-location-arrow"></i>
                         </div>
                     </div>
                     <div class="row card-body">
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                             <label for="">Teléfono</label>
-                            <input id="telefono" type="text" class="form-control" name="telefono">
+                            <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Teléfono">
+                            <i class="fas fa-phone"></i>
                         </div>
 
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                             <label for="">Correo</label>
-                            <input type="text" class="form-control" name="correo">
+                            <input type="text" class="form-control" name="correo" placeholder="Correo">
+                            <i class="far fa-envelope"></i>
                         </div>
 
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                             <label for="">Profesión</label>
-                            <input type="text" class="form-control" name="profesion">
+                            <input type="text" class="form-control" name="profesion" placeholder="Profesión">
+                            <i class="fas fa-user-tie"></i>
                         </div>
                     </div>
                     <div class="row card-body">
@@ -137,7 +146,8 @@
                     <div class="row card-body">
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                             <label for="">Edad</label>
-                            <input id="edad" type="text" class="form-control" name="edad">
+                            <input id="edad" type="text" class="input form-control" name="edad" placeholder="edad">
+                            <i class="fas fa-user" area-hidden="true"></i>
                         </div>
 
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
@@ -150,8 +160,8 @@
                             </select>
                         </div>
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
-                            <label for="">Grupo</label>
-                            <select id="grupo_id" class="form-control" name="grupo_id[]" multiple>
+                            <label for="" class="col-2">Grupo</label>
+                            <select id="grupo_id" class="form-control col-2" name="grupo_id[]" multiple>
                                 <option value="">Seleccione</option>
                                 @foreach($grupos as $value)
                                 <option value="{{$value->id}}">{{$value->nombre}}</option>

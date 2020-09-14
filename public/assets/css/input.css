@@ -1,0 +1,27 @@
+.fas,.far{
+    position:absolute;
+    left :11px; 
+    top:25px; 
+    padding:8px 10px;
+    font-size: 120%;
+    color:white;
+    border:1px solid gray;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: gray;
+}
+
+
+.input{
+    outline: none;
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+input[type=text],select{
+    padding-left: 40px;
+}
+
+input:focus{
+    
+}
