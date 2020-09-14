@@ -82,6 +82,8 @@ class PersonaController extends Controller
         $persona->id_municipio = $request->id_municipio;
         $persona->id_tipo_de_persona = $request->id_tipo_de_persona;
         $persona->edad = $request->edad;
+        $estado = $this->guardarEstadoSegunGrupoRegistrado($request);
+        $persona->estado = $estado;
         $persona->save();
 
         $this->guardarTablaDeDetalleLenguajesProgramacion($request);
@@ -90,11 +92,15 @@ class PersonaController extends Controller
         return redirect() -> back();
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
+    public function guardarEstadoSegunGrupoRegistrado(Request $request){
+        $numeroDeCursos = $request->grupo_id;
+        $estadoGrupoRegistrado = 0;
+        if (is_countable($numeroDeCursos) && count($numeroDeCursos) > 0) {
+            $estadoGrupoRegistrado = 1;
+        }        
+        return $estadoGrupoRegistrado;
+    }
+
     public function guardarTablaDeDetalleLenguajesProgramacion(Request $request){
         $identificacionEstudiante = $request->identificacion;
         $numeroDeLenguajes = count($request->lenguaje_id);
@@ -107,21 +113,18 @@ class PersonaController extends Controller
         }
     }
 
-     /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function guardarTablaDetalleHistorialGrupos(Request $request){
         $identificacionEstudiante = $request->identificacion;
-        $numeroDeCursos = count($request->grupo_id);
+        $numeroDeCursos = $request->grupo_id;
         $grupo = $request->grupo_id;
-        for ($i = 0; $i < $numeroDeCursos; $i++) {
-            HistorialEstudianteGrupo::create([
-                'id_persona' => $identificacionEstudiante,
-                'id_grupo' => $grupo[$i]
-            ]);
-        }
+        if (is_countable($numeroDeCursos) && count($numeroDeCursos) > 0) {
+            for ($i = 0; $i < count($numeroDeCursos); $i++) {
+                HistorialEstudianteGrupo::create([
+                    'id_persona' => $identificacionEstudiante,
+                    'id_grupo' => $grupo[$i]
+                ]);
+            }
+        }        
     }
 
     /**

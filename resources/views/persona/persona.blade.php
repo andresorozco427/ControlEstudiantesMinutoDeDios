@@ -181,6 +181,43 @@
         </div>
     </form>
 </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Identificacion</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($personas as $Indice => $value)
+                    <tr>
+                        <td class="col1"><b>{{$Indice+1}}</b></td>
+                        <td>{{$value->identificacion}}</td>
+                        <td>{{$value->nombre}}</td>
+                        <td>{{$value->apellido}}</td>
+                        <td>{{$value->edad}}</td>
+                        <td>{{$value->telefono}}</td>
+                        <td>{{$value->direccion}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="ver({{$value->identificacion}})" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-primary" onclick="editar({{$value->identificacion}})" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section("script")
@@ -189,10 +226,10 @@
         var x = document.getElementById("formularioRegistroEstudiante");
         if (x.style.display === "none") {
             $("#crearEstudiantebtn").html("Ocultar Formulario");
-            x.style.display = "block";            
+            x.style.display = "block";
         } else {
             $("#crearEstudiantebtn").html("Crear Estudiante");
-            x.style.display = "none";            
+            x.style.display = "none";
         }
     }
 </script>
