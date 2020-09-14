@@ -42,9 +42,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-head">
-                        <br />
-                        <h4 class="text-center">Info Estudiante</h4>
+                    <div class="card-head">                        
+                        <h4 class="text-center">Crear Usuario</h4>
+                        <hr>
+                        <br>
                     </div>
                     <div class="row card-body">
                         <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
@@ -171,40 +172,134 @@
         </div>
     </form>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-sm-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Identificacion</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($personas as $Indice => $value)
-                    <tr>
-                        <td class="col1"><b>{{$Indice+1}}</b></td>
-                        <td>{{$value->identificacion}}</td>
-                        <td>{{$value->nombre}}</td>
-                        <td>{{$value->apellido}}</td>
-                        <td>{{$value->edad}}</td>
-                        <td>{{$value->telefono}}</td>
-                        <td>{{$value->direccion}}</td>
-                        <td>
-                            <button type="button" class="btn btn-primary" onclick="ver({{$value->identificacion}})" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-primary" onclick="editar({{$value->identificacion}})" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+<hr>
+<h4 align="center">Información personas</h4>
+<hr>
+<br>
+<div class="col-12 col-md-12 col-lg-12 col-xl-12 col-sm-12">    
+    <table id="tablaEstudiantes" class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Identificacion</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($personas as $Indice => $value)
+            <tr>
+                <td class="col1"><b>{{$Indice+1}}</b></td>
+                <td>{{$value->identificacion}}</td>
+                <td>{{$value->nombre}}</td>
+                <td>{{$value->apellido}}</td>
+                <td>{{$value->edad}}</td>
+                <td>{{$value->telefono}}</td>
+                <td>{{$value->direccion}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="verPersona({{$value->identificacion}})" data-toggle="modal" data-target="#verPersona"><i class="fa fa-eye" aria-hidden="true"></i></button>                    
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+<div id="verPersona" class="modal fade animated" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Información estudiante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Identificación</label>
+                        <input id="identificacionVer" type="text" class="form-control" name="identificacionVer" disabled>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Tipo de Identificación</label>
+                        <input id="tipoIdentificacionVer" type="text" class="form-control" name="tipoIdentificacionVer" disabled>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Nombre</label>
+                        <input id="nombreVer" type="text" class="form-control" name="nombreVer" disabled>
+                    </div>
+                </div>
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Apellido</label>
+                        <input id="apellidoVer" type="text" class="form-control" name="apellidoVer" disabled>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Género</label>
+                        <input id="generoVer" type="text" class="form-control" name="generoVer" disabled>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Dirección</label>
+                        <input id="direccionVer" type="text" class="form-control" name="direccionVer" disabled>
+                    </div>
+                </div>
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Teléfono</label>
+                        <input id="telefonoVer" type="text" class="form-control" name="telefonoVer" disabled>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Correo</label>
+                        <input id="correoVer" type="text" class="form-control" name="correoVer" disabled>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Profesión</label>
+                        <input id="profesionVer" type="text" class="form-control" name="profesionVer" disabled>
+                    </div>
+                </div>
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Departamento</label>
+                        <input id="departamentoVer" type="text" class="form-control" name="departamentoVer" disabled>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Municipio</label>
+                        <input id="municipioVer" type="text" class="form-control" name="municipioVer" disabled>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Tipo de Persona</label>
+                        <input id="tipoPersonaVer" type="text" class="form-control" name="tipoPersonaVer" disabled>
+                    </div>
+                </div>
+                <div class="row card-body">
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Edad</label>
+                        <input id="edadVer" type="text" class="form-control" name="edadVer" disabled>
+                    </div>
+
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Lenguaje</label>
+                        <ul id="lenguajesVer" class="list-group list-group-flush">                            
+                        </ul>
+                    </div>
+                    <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
+                        <label for="">Grupo</label>
+                        <ul id="gruposVer" class="list-group list-group-flush">                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
@@ -212,6 +307,43 @@
 
 @section("script")
 <script>
+    $(document).ready(function() {
+        $('#tablaEstudiantes').DataTable();
+    });
+    function verPersona(identificacion) {
+        $.ajax({
+            url: '/persona/ver',
+            type: 'GET',
+            data: {
+                'identificacion': identificacion,
+            },
+            datatype: 'json',
+            success: function(data) {
+                $('#lenguajesVer').empty();
+                $('#gruposVer').empty();
+                $("#identificacionVer").val(data.Persona["identificacion"]);
+                $("#tipoIdentificacionVer").val(data.Persona["nombreTipoIdentificacion"]);
+                $("#nombreVer").val(data.Persona["nombre"]);
+                $("#apellidoVer").val(data.Persona["apellido"]);
+                $("#generoVer").val(data.Persona["nombreGenero"]);
+                $("#direccionVer").val(data.Persona["direccion"]);
+                $("#telefonoVer").val(data.Persona["telefono"]);
+                $("#correoVer").val(data.Persona["correo"]);
+                $("#profesionVer").val(data.Persona["profesion"]);
+                $("#departamentoVer").val(data.Persona["departamento"]);
+                $("#municipioVer").val(data.Persona["municipio"]);
+                $("#tipoPersonaVer").val(data.Persona["tipoPersona"]);
+                $("#edadVer").val(data.Persona["edad"]);
+                $.each(data["lenguajes"], function(i, elemento) {                    
+                    $('#lenguajesVer').append('<li class="list-group-item">'+elemento.nombre+'</li>');
+                });   
+                $.each(data["grupos"], function(i, elemento) {                    
+                    $('#gruposVer').append('<li class="list-group-item">'+elemento.nombre+'</li>');
+                });            
+            }
+        });
+    }
+
     function ocultarEstudiante() {
         var x = document.getElementById("formularioRegistroEstudiante");
         if (x.style.display === "none") {

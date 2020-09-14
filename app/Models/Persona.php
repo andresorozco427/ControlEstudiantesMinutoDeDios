@@ -9,7 +9,7 @@ class Persona extends Model
     public $table = 'tbl_persona';
     protected $fillable = [
         'identificacion', 'id_tipo_identificacion', 'nombre', 'apellido', 'id_sexo', 'direccion',
-        'telefono', 'correo', 'profesion', 'id_departamento', 'id_municipio', 'id_tipo_de_persona', 'edad', 'estado'
+        'telefono', 'correo', 'profesion', 'id_departamento', 'id_municipio', 'id_tipo_de_persona', 'edad'
     ];
     public $timestamps = false;
     protected $primaryKey = 'identificacion';

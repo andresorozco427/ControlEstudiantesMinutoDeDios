@@ -25,7 +25,7 @@ class PersonaController extends Controller
     public function index()
     {
         $personas = Persona::select("tbl_persona.*", "tbl_departamentos.departamento", "tbl_municipios.municipio", 
-        "tbl_tipo_de_persona.nombre", "tbl_sexo.nombre", "tbl_tipos_de_documento.nombre")
+        "tbl_tipo_de_persona.nombre as tipoPersona", "tbl_sexo.nombre as nombreGenero", "tbl_tipos_de_documento.nombre as tipoDocumento")
         ->join("tbl_departamentos", "tbl_persona.id_departamento", "=", "tbl_departamentos.id")
         ->join("tbl_municipios", "tbl_persona.id_municipio", "=", "tbl_municipios.id")
         ->join("tbl_tipo_de_persona", "tbl_persona.id_tipo_de_persona", "=", "tbl_tipo_de_persona.id")
@@ -82,23 +82,12 @@ class PersonaController extends Controller
         $persona->id_municipio = $request->id_municipio;
         $persona->id_tipo_de_persona = $request->id_tipo_de_persona;
         $persona->edad = $request->edad;
-        $estado = $this->guardarEstadoSegunGrupoRegistrado($request);
-        $persona->estado = $estado;
         $persona->save();
 
         $this->guardarTablaDeDetalleLenguajesProgramacion($request);
         $this->guardarTablaDetalleHistorialGrupos($request);
 
         return redirect() -> back();
-    }
-
-    public function guardarEstadoSegunGrupoRegistrado(Request $request){
-        $numeroDeCursos = $request->grupo_id;
-        $estadoGrupoRegistrado = 0;
-        if (is_countable($numeroDeCursos) && count($numeroDeCursos) > 0) {
-            $estadoGrupoRegistrado = 1;
-        }        
-        return $estadoGrupoRegistrado;
     }
 
     public function guardarTablaDeDetalleLenguajesProgramacion(Request $request){
@@ -133,26 +122,31 @@ class PersonaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $personas = Persona::select("tbl_persona.*", "tbl_departamentos.departamento", "tbl_municipios.municipio", 
-        "tbl_tipo_de_persona.nombre", "tbl_sexo.nombre", "tbl_tipos_de_documento.nombre")
-        ->join("tbl_departamentos", "tbl_persona.id_departamento", "=", "id")
-        ->join("tbl_municipios", "tbl_persona.id_municipio", "=", "id")
-        ->join("tbl_tipo_de_persona", "tbl_persona.id_tipo_de_persona", "=", "id")
-        ->join("tbl_sexo", "tbl_persona.id_sexo", "=", "id")
-        ->join("tbl_tipos_de_documento", "tbl_persona.id_tipo_identificacion", "=", "id")
-        ->where("id_departamento", $id)
-        ->where("id_municipio", $id)
-        ->where("id_tipo_de_persona", $id) 
-        ->where("id_sexo", $id)
-        ->where("id_tipo_identificacion", $id)
-        ->first();
+       $identificacionPersona = $request->identificacion;
+       
+       $personas = Persona::select("tbl_persona.*", "tbl_departamentos.departamento", "tbl_municipios.municipio", 
+       "tbl_tipo_de_persona.nombre as tipoPersona", "tbl_sexo.nombre as nombreGenero", "tbl_tipos_de_documento.nombre as nombreTipoIdentificacion")
+       ->join("tbl_departamentos", "tbl_persona.id_departamento", "=", "tbl_departamentos.id")
+       ->join("tbl_municipios", "tbl_persona.id_municipio", "=", "tbl_municipios.id")
+       ->join("tbl_tipo_de_persona", "tbl_persona.id_tipo_de_persona", "=", "tbl_tipo_de_persona.id")
+       ->join("tbl_sexo", "tbl_persona.id_sexo", "=", "tbl_sexo.id")
+       ->join("tbl_tipos_de_documento", "tbl_persona.id_tipo_identificacion", "=", "tbl_tipos_de_documento.id")
+       ->where("tbl_persona.identificacion", $identificacionPersona)
+       ->first();
 
-        return response()->json([
-            "ok"=> true,
-            "data"=> $personas
-        ]);
+       $lenguajes = DetalleEstudiantesLenguajes::select("tbl_lenguajes.*")
+       ->join("tbl_lenguajes", "tbl_detalle_estudiante_lenguajes.id_lenguaje", "=", "tbl_lenguajes.id")
+       ->where("tbl_detalle_estudiante_lenguajes.id_estudiante", $identificacionPersona)
+       ->get();
+
+       $grupos = HistorialEstudianteGrupo::select("tbl_grupo.*")
+       ->join("tbl_grupo", "tbl_historial_estudiantes_grupos.id_grupo", "=", "tbl_grupo.id")
+       ->where("tbl_historial_estudiantes_grupos.id_persona", $identificacionPersona)
+       ->get();
+
+       return (response()->json(array('Persona' => $personas, 'lenguajes' => $lenguajes, 'grupos' => $grupos)));
     }
 
 
@@ -165,53 +159,7 @@ class PersonaController extends Controller
      */
     public function update(Request $respuesta, $id)
     {
-        $datos = $respuesta->all();
 
-        $validador = Validator::make($respuesta->all(), [
-            'id_tipo_identificacion' => 'required|numeric|max:11',
-            'nombre' => 'required|max:50',
-            'apellido' => 'required|max:50',
-            'id_sexo' => 'required|numeric|max:11',
-            'direccion' => 'required|max:50',
-            'telefono' => 'required|max:20',
-            'correo' => 'required|max:50',
-            'profesion' => 'required|max:50',
-            'id_departamento' => 'required|numeric|max:11',
-            'id_municipio' => 'required|numeric|max:11',
-            'id_tipo_de_persona' => 'required|numeric|max:11',
-            'edad' => 'required|numeric|max:3',
-        ]);
-
-        if ($validador->fails()){
-            return response()->json([
-              'ok'=> false,
-              'error'=> $validador
-              ]);
-        }
-
-        try{
-        $persona = Persona::find($id);
-
-        if($persona == false){
-            return response()->json([
-                "ok" => false,
-                "error" => "No se encontro el estudiante"
-            ]);
-        }
-
-        $persona->update($input);
-
-        return response()->json([
-            "ok"=> true,
-            "mensaje" => "Modificación exitosa" 
-        ]);
-
-        }catch(\Exception $ex){
-            return response()->json([
-                "ok" => false,
-                "error" => $ex-> getMessage()
-            ]);
-        }
     }
 
     /**
@@ -222,28 +170,6 @@ class PersonaController extends Controller
      */
     public function destroy($id)
     {
-        try{
-            $persona = Persona::find($id);
-    
-            if($persona == false){
-                return response()->json([
-                    "ok" => false,
-                    "error" => "No se encontro el estudiante"
-                ]);
-            }
-    
-            $persona->destroy($id);
-    
-            return response()->json([
-                "ok"=> true,
-                "mensaje" => "Eliminación exitosa" 
-            ]);
-    
-            }catch(\Exception $ex){
-                return response()->json([
-                    "ok" => false,
-                    "error" => $ex-> getMessage()
-                ]);
-            }
+      
     }
 }

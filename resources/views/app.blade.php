@@ -37,7 +37,7 @@
                                 <a href="{{ URL::to('estudiantes') }}" {!! (Request::is('estudiantes')? 'class="active"' :"") !!}>Estudiantes<span class="glyphicon glyphicon-user pull-right"></span></a>
                             </li>
                             <li>
-                                <a href="{{ URL::to('grupos') }}" {!! (Request::is('grupos')? 'class="active"' :"") !!}>Grupos<span class="glyphicon glyphicon-heart pull-right"></span></a>
+                                <a href="{{ URL::to('grupos') }}" {!! (Request::is('grupos')? 'class="active"' :"") !!}>Grupos<span class="glyphicon glyphicon-book pull-right"></span></a>
                             </li>
                             <li>
                                 <a href="{{ URL::to('historialGrupos') }}" {!! (Request::is('historialGrupos')? 'class="active"' :"") !!}>Cursos<span class="glyphicon glyphicon-education pull-right"></span></a>

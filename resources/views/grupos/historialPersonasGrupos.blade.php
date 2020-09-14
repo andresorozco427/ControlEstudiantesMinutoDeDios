@@ -2,7 +2,7 @@
 
 @section("contenido")
 <div class="container-fluid">
-    <table class="table">
+    <table id="DetalleEstudiantesGrupos" class="table">
         <thead class="thead-dark">
             <th width="15px">#</th>
             <th>Identificación</th>
@@ -24,7 +24,7 @@
                 <td>{{date('d/m/Y', strtotime($value->fecha_inicio))}}</td>
                 <td>{{date('d/m/Y', strtotime($value->fecha_fin))}}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="verHistorial({{$value->id}}, {{$value->identificacion}})" data-toggle="modal" data-target="#verDetalleHistorialGrupos"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="verHistorial({{$value->id}}, {{$value->identificacion}})" data-toggle="modal" data-target="#verDetalleHistorialGrupos"><i class="fa fa-eye" aria-hidden="true"></i></button>
                     <button type="button" class="btn btn-danger" onclick="eliminarPersonaDeGrupo({{$value->id}}, {{$value->identificacion}})"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                 </td>
             </tr>
@@ -46,22 +46,19 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="Identificacion">Identificacion:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="Identificacion" disabled>
                         </div>
                     </div>
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="Nombre">Nombre:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="Nombre" disabled>
                         </div>
                     </div>
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="Correo">Correo:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="Correo" disabled>
                         </div>
                     </div>
@@ -69,22 +66,19 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="Edad">Edad:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="Edad" disabled>
                         </div>
                     </div>
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="Profesion">Profesion:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="Profesion" disabled>
                         </div>
                     </div>
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="Telefono">Telefono:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="Telefono" disabled>
                         </div>
                     </div>
@@ -95,30 +89,26 @@
                 <div class="form-row">
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="NombreCurso">Nombre:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="NombreCurso" disabled>
                         </div>
                     </div>
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="fecha_inicio">Fecha Inicio:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="fecha_inicio" disabled>
                         </div>
                     </div>
                     <div class="form-group col-12 col-md-4 col-lg-4 col-xl-4 col-sm-12">
                         <label class="control-label" for="fecha_fin">Fecha Fin:</label>
-                        <div class="input-group input-group-prepend">
-                            <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                        <div class="input-group input-group-prepend">                           
                             <input type="text" class="form-control" id="fecha_fin" disabled>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-12 col-md-12 col-lg-12 col-xl-12 col-sm-12">
                     <label class="control-label" for="descripcion">Descripcion:</label>
-                    <div class="input-group input-group-prepend">
-                        <span class="input-group-text border-right-0  rounded-0" style="background: #48DA7D;"><i class="fa fa-fw fa-thumb-tack"></i></span>
+                    <div class="input-group input-group-prepend">                       
                         <textarea class="form-control" id="descripcion" aria-label="With textarea" cols="110" disabled></textarea>
                     </div>
                 </div>
@@ -136,6 +126,9 @@
 
 @section("script")
 <script>
+    $(document).ready(function() {
+        $('#DetalleEstudiantesGrupos').DataTable();
+    });
     function verHistorial(id, identificacion) {
         $.ajax({
             url: "/historialGrupos/ver",
