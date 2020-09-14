@@ -81,7 +81,6 @@
                         <td>{{$value->descripcion}}</td>
                         <td>
                             <button type="button" class="btn btn-primary" onclick="editar({{$value->id}})" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-
                         </td>
                     </tr>
                     @endforeach
