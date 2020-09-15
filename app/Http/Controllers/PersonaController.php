@@ -65,7 +65,7 @@ class PersonaController extends Controller
             'identificacion' => 'required|unique:tbl_persona',
             'nombre' => 'required',
             'apellido' => 'required',
-            'telefono' => 'required|unique:tbl_persona',
+            'telefono' => 'required',
             'edad' => 'required'
         ]);
 

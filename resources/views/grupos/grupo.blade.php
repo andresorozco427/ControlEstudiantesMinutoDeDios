@@ -99,6 +99,7 @@
                                                     <div class="form-group col-md-6">
                                                         <label for="fechaFin">Fecha Fin</label>
                                                         <input type="date"  class="form-control" id="fecha_fin_upd" name="fecha_fin_upd" placeholder="Fecha Fin">
+                                        
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
